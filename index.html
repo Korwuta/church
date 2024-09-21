@@ -13,6 +13,11 @@
                 --account-border-color:#D4DAF5;
                 --toggle-background-color:white;
                 --toggle-border:whitesmoke;
+                --upcoming-event-background-color:#F2F4F8;
+                --table-background-color:#F8F9FB;
+                --table-shadow:gainsboro;
+                --table-border:whitesmoke;
+                --table-head:#e0e2ea;
             }
             [mode="dark"]{
                 --background-color-body: #1E1F22;
@@ -21,6 +26,11 @@
                 --account-border-color:grey;
                 --toggle-background-color:#3B3B3B;
                 --toggle-border: #1E1F22;
+                --upcoming-event-background-color:#2B2D30;
+                --table-background-color:#3C3F41;
+                --table-shadow:#191A1D;
+                --table-border:#2B2D30;
+                --table-head:#1E1F22;
             }
             body{
 
@@ -61,6 +71,21 @@
                 margin-bottom: 40px;
                 margin-left: 50px;
             }
+            button:focus,
+            button:focus-visible {
+            outline: 4px auto -webkit-focus-ring-color;
+            }
+            button{
+                padding: 15px 0;
+                background-color: #0078D4;
+                color: white;
+                font-size: 1.1rem;
+                border-radius: 15px;
+                border: none;
+                margin: 7vh 0;
+                font-family: "Nunito",sans-serif;
+                width: 80%;
+            }
             .text-content>div>h1{
                 font-size: 2.2rem;
             }
@@ -75,6 +100,7 @@
                 list-style: none;
                 margin: 0;
                 gap: 10px;
+                padding-left: 10vw;
             }
             .navbar li{
                 padding: 10px 20px;
@@ -109,7 +135,10 @@
             }
             main{
                 height: 100vh;
-                padding: 2vh 60px;
+                padding: 2vh 0;
+            }
+            main section>*{
+                padding: 0 5vw;
             }
             .account-face{
                 border-radius: 50%;
@@ -152,7 +181,7 @@
             .dark-mode-toggle{
                 position: absolute;
                 top: 20px;
-                right: 40px;
+                right: 10vw;
                 z-index: 10000;
                 width: 100px;
                 transform-origin: right center;
@@ -202,11 +231,68 @@
                 display: block;
                 text-align: center;
             }
+            .upcoming-events{
+                display: flex;
+                padding: 20vh 5vw;
+                margin: 10vh 0;
+                background-color: var(--upcoming-event-background-color);
+                gap: 8%;
+                place-items: center;
+            }
+            .upcoming-events h1{
+                font-size: 2.7rem;
+                margin: 0 0 10px 0;
+            }
+            .events{
+                flex: 1;
+            }
+            .events table{
+                border-collapse: collapse;
+                width: 100%;
+                text-align: left;
+                background-color: var(--table-background-color);
+                border: 1px solid gainsboro;
+                border-radius: 10px;    
+                contain: paint;
+                font-size: 1.1rem;
+                box-shadow: 0 0 4px 1px var(--table-shadow);
+            }
+            .events thead>tr{
+                background-color: var(--table-head);
+            }
+            .events tr{
+                border: 2px solid var(--table-border);
+            }
+            .events td,.events th{
+                padding: 20px 25px;
+            
+            }
+            .message{
+                width: 35%;
+            }
+            .middle-image{
+                
+                display: grid;
+                text-align: center;
+            }
+            .middle-image>div{
+                width: 90%;
+                border-radius: 20px;
+                contain: paint;
+                justify-self: center;
+            }
+            .middle-image img{
+                width: 100%;
+                height: auto;
+                display: block;
+                text-align: center;
+            }
+            
             @media screen and (max-width:900px) {
                 body{
                     font-size: 1rem;
                 }
-                main{
+                main section>*{
                     padding: 2vh 20px;
                 }
                 .dark-mode-toggle{
@@ -230,6 +316,52 @@
                 }
                 .navbar ul{
                     padding-left: 20px;
+                }
+                .upcoming-events{
+                    display: grid;
+                    padding-top: 6vh;
+                    padding-bottom: 6vh;
+                    gap: 8vh;
+                    text-align: center;
+                    margin: 6vh 0;
+                }
+                .events{
+                    width: 100%;
+                    overflow-y: scroll;
+                }
+                .upcoming-events table{
+                    font-size: 0.8rem;
+                    min-width: 500px;
+                }
+                .upcoming-events td,.upcoming-events td{
+                    padding: 10px 20px;
+                }
+                .message{
+                    width: 100%;
+                }
+                .message h1{
+                    font-size: 2rem;
+                }
+                .message span{
+                    font-size: 0.9rem
+                }
+                button{
+                    font-size: 1rem;
+                }
+                .first{
+                    display: none;
+                }
+                div[title="announcement"]{
+                    display: flex;
+                    flex-direction: column-reverse;
+                }
+                .middle-image>div{
+                    width: 100%;
+                    border-radius: 10px;
+                }
+                .account-container{
+                    padding-left: 20px;
+                    padding-right: 20px;
                 }
             }
         </style>
@@ -281,6 +413,88 @@
                 <p>
                     Looking to make an unforgettable first impression on your Facebook page or personal profile? A standout professional cover is your answer! Dive into a world where your creativity meets convenience with the Desygner app. The next time inspiration hits, just snap a photo, launch the app, and effortlessly upload your masterpiece. With just a few taps, you'll be on your way to designing a cover that captures your audience's attention and sets you apart. Don't just blend in – shine bright with Desygner!
                 </p>
+                <div class="upcoming-events">
+                    <div class="message">
+                        <h1>Upcoming Events</h1>
+                        <span>exciting events that will be happening this year</span>
+                        <button class="first">Read More Events</button>
+                    </div>
+                    <div class="events">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="middle-image">
+                    <div><img src="pexels-jibarofoto-2014775 (1).jpg" alt=""></div>
+                    <h1>Praise</h1>
+                </div>
+                <div class="upcoming-events"  title="announcement">
+                    <div class="events">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Event</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                                <tr>
+                                    <td>Naming Ceremony of Yaw</td>
+                                    <td>24th Febuary</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="message">
+                        <h1>Upcoming Events</h1>
+                        <span>exciting events that will be happening this year</span>
+                        <button class="first">Read More Events</button>
+                    </div>
+                </div>
                 <div class="account-container">
                     <div class="account">
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
@@ -293,28 +507,28 @@
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
                         <div>
                             <p>Mr. Collins Korwuta</p>
-                            <span>Developer/Analyst</span>
+                            <span>Chef Executive Officer</span>
                         </div>
                     </div>
                     <div class="account">
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
                         <div>
                             <p>Mr. Collins Korwuta</p>
-                            <span>Developer/Analyst</span>
+                            <span>Chef Executive Officer</span>
                         </div>
                     </div>
                     <div class="account">
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
                         <div>
                             <p>Mr. Collins Korwuta</p>
-                            <span>Developer/Analyst</span>
+                            <span>Chef Executive Officer</span>
                         </div>
                     </div>
                     <div class="account">
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
                         <div>
                             <p>Mr. Collins Korwuta</p>
-                            <span>Developer/Analyst</span>
+                            <span>Chef Executive Officer</span>
                         </div>
                     </div>
                 </div>
