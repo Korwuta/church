@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+        <link rel='preconnect' href='https://fonts.googleapis.com'>
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <style>
+            :root{
+                --background-color-body: white;
+                --text-color:black;
+                --account-background-color:#F1F4FD;
+                --account-border-color:#D4DAF5;
+                --toggle-background-color:white;
+                --toggle-border:whitesmoke;
+            }
+            [mode="dark"]{
+                --background-color-body: #1E1F22;
+                --text-color:white;
+                --account-background-color:#2B2D30;
+                --account-border-color:grey;
+                --toggle-background-color:#3B3B3B;
+                --toggle-border: #1E1F22;
+            }
+            body{
+
+                margin: 0;
+                padding: 0;
+                font-family: "Nunito",sans-serif;
+                font-size: 1.2rem;
+                color: var(--text-color);
+                background-color: var(--background-color-body);
+            }
+            header{
+                height: 40vh;
+                position: relative;
+                contain: paint;
+                border-bottom: 1px solid #313030;
+            }
+            .preview{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 40vh;
+                object-fit: cover;
+                object-position: center center;
+                z-index: -100;
+            }
+            .text-content{
+                width: 100%;
+                height:100%;
+                background: linear-gradient(180deg,rgba(0,0,0,0.2) 1%,rgba(0,0,0,1) 100%);
+                display: flex;
+                place-items: end;
+                color: white;
+            }
+            .text-content div{
+                margin-bottom: 40px;
+                margin-left: 50px;
+            }
+            .text-content>div>h1{
+                font-size: 2.2rem;
+            }
+            .navbar{
+                width: 100%;
+                padding-top: 8px;
+                position: sticky;
+                top: 0;
+            }
+            .navbar ul{
+                display: flex;
+                list-style: none;
+                margin: 0;
+                gap: 10px;
+            }
+            .navbar li{
+                padding: 10px 20px;
+                cursor: pointer;
+                position: relative;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+            }
+            .navbar li:hover{
+                background-color: rgba(88, 174, 239, 0.2);
+            }
+            .navbar li::after{
+                content: '';
+                background-color: white;
+                width: 10px;
+                height: 3px;
+                position: absolute;
+                border-radius: 5px;
+                bottom: 3px;
+                left: 50%;
+                transition: all 0.7s ease;
+                transform: translateX(-50%);
+            }
+            .navbar-active{
+                transition: all 0.7s ease;
+                background-color: rgba(88, 174, 239, 0.4) !important;
+            
+            }
+            .navbar-active::after{
+                width: 40% !important;
+                background-color: rgba(88, 174, 239) !important;
+            }
+            main{
+                height: 100vh;
+                padding: 2vh 60px;
+            }
+            .account-face{
+                border-radius: 50%;
+                contain: paint;
+                width: fit-content;
+            }
+            .account-face img{
+                text-align: center;
+                display: block;
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                object-position: center top;
+            }
+            .account{
+                width: 300px;
+                min-width: 300px;
+                padding: 40px 0 25px 0;
+                background-color: var(--account-background-color);
+                border: 1px solid var(--account-border-color);
+                border-radius: 8px;
+                display: grid;
+                justify-items: center;
+                text-align: center;
+                gap: 20px;
+            }
+            .account p{
+                margin: 5px 0;
+            }
+            .account span{
+                font-size: 1rem;
+            }
+            .account-container{
+                display: flex;
+                gap: 30px;
+                overflow-x: scroll;
+                padding: 5vh 0;
+                scrollbar-width: none;
+            }
+            .dark-mode-toggle{
+                position: absolute;
+                top: 20px;
+                right: 40px;
+                z-index: 10000;
+                width: 100px;
+                transform-origin: right center;
+                background-color: var(--toggle-background-color);
+                display: flex;
+                place-items: center;
+                padding: 5px;
+                border-radius: 30px;
+            }
+            .toggle-svg-holder{
+                width: fit-content;
+                border-radius: 50%;
+                padding: 6px;
+                z-index: 100;
+            }
+            .dark-mode-toggle>div{
+                background-color: #F1F4FD;
+                border: 1px solid var(--toggle-border);
+                width: 100%;
+                border-radius: 30px;
+                display: flex;
+                place-content: space-between;
+                position: relative;
+                transition: all 0 ease 0.4s;
+            }
+            .dark-mode-toggle>div::after{
+                content: '';
+                background-color: #1E1F22;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                padding: 6px;
+                border-radius: 50%;
+                transition: all 0.5s ease ;
+            }
+            .set-dark-mode{
+                background-color: gray!important;
+            }
+            .set-dark-mode::after{
+                left: 100% !important;
+                transform: translateX(-100%) !important;
+            }
+            .dark-mode-toggle svg{
+                display: block;
+                text-align: center;
+            }
+            @media screen and (max-width:900px) {
+                body{
+                    font-size: 1rem;
+                }
+                main{
+                    padding: 2vh 32px;
+                }
+                .dark-mode-toggle{
+                    right: 32px;
+                    scale: 0.9;
+                }
+                .account{
+                    min-width: 180px;
+                    width: 180px;
+                    padding: 30px 0 15px 0;
+                }
+                .account-face img{
+                    width: 80px;
+                    height: 80px;
+                }
+                .account p{
+                    font-size: 0.9rem;
+                }
+                .account span{
+                    font-size: 0.7rem;
+                }
+            }
+        </style>
+    </head>
+    <body >
+        <header>
+            <img class="preview" src="cover.jpg" id="image-container" >
+            <div class="text-content">
+                <nav class="navbar">
+                    <ul>
+                        <li>Info</li>
+                        <li>Register</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="dark-mode-toggle">
+                <div>
+                    <div class="toggle-svg-holder" onclick="toggleLightDark('light')">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                            <g clip-path="url(#a)" fill="white">
+                            
+                            <path d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/>
+                            
+                            </g>
+                            
+                            <defs>
+                            
+                            <clipPath id="a">
+                            
+                            <path fill="white" d="M0 0h24v24H0z"/>
+                            
+                            </clipPath>
+                            
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="toggle-svg-holder" onclick="toggleLightDark('dark')">
+                        <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="content">
+                <h2>Information</h2>
+                <p>
+                    Looking to make an unforgettable first impression on your Facebook page or personal profile? A standout professional cover is your answer! Dive into a world where your creativity meets convenience with the Desygner app. The next time inspiration hits, just snap a photo, launch the app, and effortlessly upload your masterpiece. With just a few taps, you'll be on your way to designing a cover that captures your audience's attention and sets you apart. Don't just blend in – shine bright with Desygner!
+                </p>
+                <div class="account-container">
+                    <div class="account">
+                        <div class="account-face"><img src="cashew.jpeg" alt=""></div>
+                        <div>
+                            <p>Mr. Collins Korwuta</p>
+                            <span>Chef Executive Officer</span>
+                        </div>
+                    </div>
+                    <div class="account">
+                        <div class="account-face"><img src="cashew.jpeg" alt=""></div>
+                        <div>
+                            <p>Mr. Collins Korwuta</p>
+                            <span>Chef Executive Officer</span>
+                        </div>
+                    </div>
+                    <div class="account">
+                        <div class="account-face"><img src="cashew.jpeg" alt=""></div>
+                        <div>
+                            <p>Mr. Collins Korwuta</p>
+                            <span>Chef Executive Officer</span>
+                        </div>
+                    </div>
+                    <div class="account">
+                        <div class="account-face"><img src="cashew.jpeg" alt=""></div>
+                        <div>
+                            <p>Mr. Collins Korwuta</p>
+                            <span>Chef Executive Officer</span>
+                        </div>
+                    </div>
+                    <div class="account">
+                        <div class="account-face"><img src="cashew.jpeg" alt=""></div>
+                        <div>
+                            <p>Mr. Collins Korwuta</p>
+                            <span>Chef Executive Officer</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+        </main>
+        <script>
+            let selectedNav = 0
+            const navList = document.querySelectorAll('.navbar li')
+            const contentList = document.querySelectorAll('.content')
+            if(sessionStorage.getItem('selected-index')&&sessionStorage.getItem('selected-index')!=''){
+                selectedNav = sessionStorage.getItem('selected-index')
+            }
+            navList.forEach((ele,index)=>{
+                ele.addEventListener('click',()=>{
+                    sessionStorage.setItem('selected-index',index)
+                    onSelectedIndex(index)
+                })
+            })
+            onSelectedIndex(selectedNav)
+            function onSelectedIndex(selectedIndex){
+                navList.forEach((ele,index)=>{
+                    if(index==selectedIndex){
+                        ele.classList.add('navbar-active')
+                    }else{
+                        ele.classList.remove('navbar-active')
+                    }
+                })
+                contentList.forEach((ele,index)=>{
+                    if(index==selectedIndex){
+                        ele.style.display = ''
+                    }else{
+                        ele.style.display = 'none'
+                    }
+                })
+            }
+            function toggleLightDark(mode){
+                const toggle = document.querySelector('.dark-mode-toggle>div')
+                if(mode==='dark'){
+                    toggle.classList.add('set-dark-mode')
+                    document.body.setAttribute("mode","dark")
+                }else{
+                    document.body.setAttribute("mode","light")
+                    toggle.classList.remove('set-dark-mode')
+                }
+            }
+        </script>
+    </body>
+</html>
