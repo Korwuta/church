@@ -490,8 +490,8 @@
                         </table>
                     </div>
                     <div class="message">
-                        <h1>Upcoming Events</h1>
-                        <span>exciting events that will be happening this year</span>
+                        <h1>Announcement</h1>
+                        <span>what you need to know about about the past,present and future</span>
                         <button class="first">Read More Events</button>
                     </div>
                 </div>
@@ -539,6 +539,8 @@
             let selectedNav = 0
             const navList = document.querySelectorAll('.navbar li')
             const contentList = document.querySelectorAll('.content')
+            const mode = localStorage.getItem('mode')
+            toggleLightDark(mode)
             if(sessionStorage.getItem('selected-index')&&sessionStorage.getItem('selected-index')!=''){
                 selectedNav = sessionStorage.getItem('selected-index')
             }
@@ -567,6 +569,7 @@
             }
             function toggleLightDark(mode){
                 const toggle = document.querySelector('.dark-mode-toggle>div')
+                localStorage.setItem('mode',mode)
                 if(mode==='dark'){
                     toggle.classList.add('set-dark-mode')
                     document.body.setAttribute("mode","dark")
