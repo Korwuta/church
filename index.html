@@ -377,7 +377,9 @@
                 animation-delay: calc(var(--index)*10s);
                 opacity: 0;
                 text-wrap: wrap;
+                max-width: unset;
                 -webkit-line-clamp: 3;
+                font-size: 2rem;
             }
             .event-other-description{
                 text-align: left;
@@ -559,7 +561,8 @@
                 .event-other-description{
                     font-size: 0.9rem;
                 }
-                @keyframes middle-text-quote {
+            }
+            @keyframes middle-text-quote {
                     5%,40%{
                         transform: translateY(0%);
                         opacity: 1;
@@ -569,7 +572,6 @@
                         opacity: 0;
                     }
                 }
-            }
         </style>
     </head>
     <body >
