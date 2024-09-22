@@ -14,11 +14,11 @@
                 --toggle-background-color:white;
                 --toggle-border:whitesmoke;
                 --upcoming-event-background-color:#F2F4F8;
-                --table-background-color:#F8F9FB;
-                --table-shadow:gainsboro;
-                --table-border:whitesmoke;
-                --table-head:#e0e2ea;
+                --faint-text:gray;
+                --announcement-image-color:#3C3F41;
             }
+
+
             [mode="dark"]{
                 --background-color-body: #1E1F22;
                 --text-color:white;
@@ -27,10 +27,8 @@
                 --toggle-background-color:#3B3B3B;
                 --toggle-border: #1E1F22;
                 --upcoming-event-background-color:#2B2D30;
-                --table-background-color:#3C3F41;
-                --table-shadow:#191A1D;
-                --table-border:#2B2D30;
-                --table-head:#1E1F22;
+                --faint-text:gainsboro;
+                --announcement-image-color:#F1F4FD;
             }
             body{
 
@@ -138,7 +136,7 @@
                 padding: 2vh 0;
             }
             main section>*{
-                padding: 0 5vw;
+                padding: 0 10vw;
             }
             .account-face{
                 border-radius: 50%;
@@ -175,8 +173,9 @@
                 display: flex;
                 gap: 30px;
                 overflow-x: scroll;
-                padding: 5vh 0;
+                padding: 5vh 5vw;
                 scrollbar-width: none;
+                contain: paint;
             }
             .dark-mode-toggle{
                 position: absolute;
@@ -196,6 +195,10 @@
                 border-radius: 50%;
                 padding: 6px;
                 z-index: 100;
+            }
+            svg{
+                display: block;
+                text-align: center;
             }
             .dark-mode-toggle>div{
                 background-color: #F1F4FD;
@@ -233,64 +236,143 @@
             }
             .upcoming-events{
                 display: flex;
-                padding: 20vh 5vw;
+                flex-direction: column;
+                padding: 8vh 10vw 8vh 10vw;
                 margin: 10vh 0;
                 background-color: var(--upcoming-event-background-color);
-                gap: 8%;
-                place-items: center;
+                gap: 60px;
+                max-height: 100vh;
+                overflow-y: scroll;
+                scrollbar-width: none;
             }
-            .upcoming-events h1{
+            h1{
                 font-size: 2.7rem;
-                margin: 0 0 10px 0;
+                margin: 30px 0 30px 0;
             }
             .events{
-                flex: 1;
+                display: flex;
+                place-items: center;
+                place-content: space-between;
             }
-            .events table{
-                border-collapse: collapse;
-                width: 100%;
-                text-align: left;
-                background-color: var(--table-background-color);
-                border: 1px solid gainsboro;
-                border-radius: 10px;    
-                contain: paint;
-                font-size: 1.1rem;
-                box-shadow: 0 0 4px 1px var(--table-shadow);
-            }
-            .events thead>tr{
-                background-color: var(--table-head);
-            }
-            .events tr{
-                border: 2px solid var(--table-border);
-            }
-            .events td,.events th{
-                padding: 20px 25px;
-            
-            }
-            .message{
-                width: 35%;
-            }
-            .middle-image{
+            .middle{
                 
                 display: grid;
                 text-align: center;
             }
-            .middle-image>div{
-                width: 90%;
+            .middle .image{
+                width: 95%;
                 border-radius: 20px;
                 contain: paint;
+                position: relative;
                 justify-self: center;
             }
-            .middle-image img{
+            .middle .image img{
                 width: 100%;
                 height: auto;
                 display: block;
                 text-align: center;
             }
+            .event{
+                display: flex;
+                gap: 30px;
+                font-size: 1rem;
+            }
+            .event-date{
+                display: flex;
+                text-align: center;
+                flex-direction: column;
+                place-content: center;
+            }
+            .event-date>:first-child{
+                font-size: 2.5rem;
+            }
+            .event-date>:last-child{
+                font-size: 1.2rem;
+            }
+            .event-image,.anouncement-image{
+                border-radius: 10px;
+                contain: paint;
+            }
+            .anouncement-image{
+                width: 120px;
+                height: 120px;
+                display: flex;
+                place-items: center;
+                background-color: var(--announcement-image-color);
+                place-content: center;
+            }
+            .anouncement-image svg{
+                width: 90px;
+                height: 90px;
+                text-align: center;
+                display: block;
+            }
+            .event-image img{
+                width: 120px;
+                height: 120px;
+                display: block;
+                text-align: center;
+            }
+
+            .event-det{
+                display: grid;
+                height: 100%;
+                padding-top: 8px;
+                gap: 10px;
+            }
+            .event-det p{
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin: 0;
+            }
+            .events button{
+                margin: 0;
+                width: unset;
+                font-size: 1rem;
+                padding: 12px 25px;
+                border-radius: 7px;
+            }
+            .event-time-info{
+                display: flex;
+                gap: 30px;
+                color: var(--faint-text);
+            }
+            .message span{
+                font-size: 1.3rem;
+            }
+            .middle .text{
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                place-items: end;
+                padding: 60px;
+                color: white;
+                background: linear-gradient(180deg,rgba(0,0,0,0.2) 10%,rgba(0,0,0,0.7) 100%);
+            }
+            .text h1{
+                margin: 0;
+            }
             
             @media screen and (max-width:900px) {
                 body{
                     font-size: 1rem;
+                }
+                .content h1{
+                    font-size: 2rem;
+                    padding: 8px 20px !important;
+                    margin: 0;
+                    margin-top: 10px;
+                }
+                .message h1{
+                    font-size: 2rem;
+                    margin-top: 30px;
+                    padding-left: 0 !important;
+                }
+                .message{
+                    text-align: left;
                 }
                 main section>*{
                     padding: 2vh 20px;
@@ -311,6 +393,16 @@
                 .account p{
                     font-size: 0.9rem;
                 }
+                .event-det{
+                    text-align: left;
+                }
+                .event-det span{
+                    font-size: 0.7rem;
+                }
+                .event-time-info svg{
+                    width: 3px;
+                    height: 3px;
+                }
                 .account span{
                     font-size: 0.7rem;
                 }
@@ -319,25 +411,52 @@
                 }
                 .upcoming-events{
                     display: grid;
-                    padding-top: 6vh;
-                    padding-bottom: 6vh;
-                    gap: 8vh;
+                    gap: 4vh;
                     text-align: center;
                     margin: 6vh 0;
+                    padding: 0 20px 6vh 20px;
                 }
-                .events{
-                    width: 100%;
-                    overflow-y: scroll;
+                .event-date>:first-child{
+                    font-size: 1rem;
                 }
-                .upcoming-events table{
-                    font-size: 0.8rem;
-                    min-width: 500px;
+                .event-date>:last-child{
+                    font-size: 0.7rem;
+                }
+                .event-time-info{
+                    display: grid;
+                    gap: 3px;
+                }
+                .event-time-info div{
+                    padding: 2px !important;
+                }
+                .event{
+                    gap: 10px;
+                    place-items: center;
+                }
+                .event-image img{
+                    width: 60px;
+                    height: 60px;
+                }
+                .anouncement-image{
+                    width: 60px;
+                    height: 60px;
+                }
+                .anouncement-image svg {
+                    width: 30px;
+                    height: 30px;
+                }
+                .event-det p{
+                    font-size: 1rem;
+                }
+                .time{
+                    display: none !important;
                 }
                 .upcoming-events td,.upcoming-events td{
                     padding: 10px 20px;
                 }
                 .message{
                     width: 100%;
+                    margin-bottom: 30px;
                 }
                 .message h1{
                     font-size: 2rem;
@@ -345,8 +464,9 @@
                 .message span{
                     font-size: 0.9rem
                 }
-                button{
-                    font-size: 1rem;
+                .events button{
+                    font-size: 0.7rem;
+                    padding: 5px 8px;
                 }
                 .first{
                     display: none;
@@ -362,6 +482,23 @@
                 .account-container{
                     padding-left: 20px;
                     padding-right: 20px;
+                }
+                .middle{
+                    padding-left: 10px;
+                    padding-right: 10px;
+                }
+                .middle .image{
+                    width: 100%;
+                    border-radius: 5px;
+                }
+                .text{
+                    padding: 10px !important;
+                }
+                .text h1{
+                    font-size: 1.3rem !important;
+                }
+                .full{
+                    display: none;
                 }
             }
         </style>
@@ -409,90 +546,180 @@
         </header>
         <main>
             <section class="content">
-                <h2>Information</h2>
+                <h1>Information</h1>
                 <p>
                     Looking to make an unforgettable first impression on your Facebook page or personal profile? A standout professional cover is your answer! Dive into a world where your creativity meets convenience with the Desygner app. The next time inspiration hits, just snap a photo, launch the app, and effortlessly upload your masterpiece. With just a few taps, you'll be on your way to designing a cover that captures your audience's attention and sets you apart. Don't just blend in – shine bright with Desygner!
                 </p>
                 <div class="upcoming-events">
                     <div class="message">
                         <h1>Upcoming Events</h1>
-                        <span>exciting events that will be happening this year</span>
-                        <button class="first">Read More Events</button>
+                        <span style="color: var(--faint-text);">exciting events that will be happening this year</span>
                     </div>
                     <div class="events">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Event</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="event">
+                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                            <div class="event-det">
+                                <p>Marriage Ceremony</p>
+                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                    viewBox="0 0 297 297" xml:space="preserve">
+                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                               </svg>
+                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                      </svg>
+                                </div>9:00am - 10:30am</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <button>View <span class="full" >Detail</span></button>
+                        </div>
                     </div>
-                </div>
-                <div class="middle-image">
-                    <div><img src="pexels-jibarofoto-2014775 (1).jpg" alt=""></div>
-                    <h1>Praise</h1>
-                </div>
-                <div class="upcoming-events"  title="announcement">
+                    
                     <div class="events">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Event</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                                <tr>
-                                    <td>Naming Ceremony of Yaw</td>
-                                    <td>24th Febuary</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="event">
+                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                            <div class="event-det">
+                                <p>Marriage Ceremony</p>
+                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                    viewBox="0 0 297 297" xml:space="preserve">
+                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                               </svg>
+                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                      </svg>
+                                </div>9:00am - 10:30am</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <button>View <span class="full" ></span></button>
+                        </div>
                     </div>
+                </div>
+                <div class="middle">
+                    <div class="image">
+                        <img src="pexels-jibarofoto-2014775 (1).jpg" alt="">
+                        <div class="text"><h1>Praise</h1><h1>Praise</h1></div>
+                    </div>
+                </div>
+                <div class="upcoming-events">
                     <div class="message">
                         <h1>Announcement</h1>
-                        <span>what you need to know about about the past,present and future</span>
-                        <button class="first">Read More Events</button>
+                        <span style="color: var(--faint-text);">exciting events that will be happening this year</span>
+                    </div>
+                    <div class="events">
+                        <div class="event">
+                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+
+                                <defs>
+                                
+                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                
+                                </defs>
+                                
+                                <g data-name="Layer 2" id="Layer_2">
+                                
+                                <g data-name="Layer 1" id="Layer_1-2">
+                                
+                                <rect class="cls-1" height="20" width="20"/>
+                                
+                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                
+                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                
+                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                
+                                </g>
+                                
+                                </g>
+                                
+                                </svg></div>
+                            <div class="event-det">
+                                <p>Marriage Ceremony</p>
+                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                    viewBox="0 0 297 297" xml:space="preserve">
+                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                               </svg>
+                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                      </svg>
+                                </div>9:00am - 10:30am</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <button>View <span class="full" >Detail</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="events">
+                        <div class="event">
+                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+
+                                <defs>
+                                
+                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                
+                                </defs>
+                                
+                                <g data-name="Layer 2" id="Layer_2">
+                                
+                                <g data-name="Layer 1" id="Layer_1-2">
+                                
+                                <rect class="cls-1" height="20" width="20"/>
+                                
+                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                
+                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                
+                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                
+                                </g>
+                                
+                                </g>
+                                
+                                </svg></div>
+                            <div class="event-det">
+                                <p>Marriage Ceremony</p>
+                                <span style="color: var(--faint-text);">Rose Mary and Frank Owusu Anti Of</span>
+                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                    viewBox="0 0 297 297" xml:space="preserve">
+                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                               </svg>
+                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                      </svg>
+                                </div>9:00am - 10:30am</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <button>View <span class="full" >Detail</span></button>
+                        </div>
                     </div>
                 </div>
                 <div class="account-container">
@@ -532,7 +759,6 @@
                         </div>
                     </div>
                 </div>
-                
             </section>
         </main>
         <script>
