@@ -15,6 +15,7 @@
                 --toggle-border:whitesmoke;
                 --upcoming-event-background-color:#F2F4F8;
                 --faint-text:gray;
+                --subtle-shadow:gainsboro;
                 --announcement-image-color:#3C3F41;
             }
 
@@ -28,6 +29,7 @@
                 --toggle-border: #1E1F22;
                 --upcoming-event-background-color:#2B2D30;
                 --faint-text:gainsboro;
+                --subtle-shadow:gray;
                 --announcement-image-color:#F1F4FD;
             }
             body{
@@ -340,6 +342,9 @@
             .message span{
                 font-size: 1.3rem;
             }
+            .event-time-info div{
+                box-shadow: 0 0 2px 1px var(--subtle-shadow);
+            }
             .middle .text{
                 position: absolute;
                 top: 0;
@@ -395,13 +400,14 @@
                 }
                 .event-det{
                     text-align: left;
+                    gap: 4px;
                 }
                 .event-det span{
                     font-size: 0.7rem;
                 }
                 .event-time-info svg{
-                    width: 3px;
-                    height: 3px;
+                    width: 5px;
+                    height: 5px;
                 }
                 .account span{
                     font-size: 0.7rem;
@@ -427,7 +433,7 @@
                     gap: 3px;
                 }
                 .event-time-info div{
-                    padding: 2px !important;
+                    padding: 3px !important;
                 }
                 .event{
                     gap: 10px;
