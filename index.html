@@ -29,7 +29,7 @@
                 --toggle-border: #1E1F22;
                 --upcoming-event-background-color:#2B2D30;
                 --faint-text:gainsboro;
-                --subtle-shadow:gray;
+                --subtle-shadow:#3B3B3B;
                 --announcement-image-color:#F1F4FD;
             }
             body{
@@ -243,7 +243,7 @@
                 margin: 10vh 0;
                 background-color: var(--upcoming-event-background-color);
                 gap: 60px;
-                max-height: 100vh;
+                max-height: 200vh;
                 overflow-y: scroll;
                 scrollbar-width: none;
             }
@@ -323,6 +323,14 @@
                 gap: 10px;
 
             }
+            .event-det p,.event-det span,.text h1{
+                display: -webkit-box;
+                max-width: 500px;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-wrap: nowrap;
+            }
             .event-det p{
                 font-size: 1.5rem;
                 font-weight: bold;
@@ -344,7 +352,7 @@
                 font-size: 1.3rem;
             }
             .event-time-info div{
-                box-shadow: 0 0 2px 1px var(--subtle-shadow);
+                box-shadow: 0 0 2px 0px var(--subtle-shadow);
             }
             .middle .text{
                 position: absolute;
@@ -352,14 +360,44 @@
                 bottom: 0;
                 left: 0;
                 right: 0;
-                display: flex;
+                display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 1fr;
                 place-items: end;
                 padding: 60px;
                 color: white;
                 background: linear-gradient(180deg,rgba(0,0,0,0.2) 10%,rgba(0,0,0,0.7) 100%);
             }
             .text h1{
+                grid-row: 1;
+                grid-column: 1;
+                text-align: left;
+                transform: translateY(100%);
+                animation: middle-text-quote 20s ease infinite;
+                transform-origin: left center;
+                animation-delay: calc(var(--index)*10s);
+                opacity: 0;
+                text-wrap: wrap;
+                -webkit-line-clamp: 3;
+            }
+            .event-other-description{
+                text-align: left;
+                padding: 0;
+                border: none;
                 margin: 0;
+                contain: paint;
+                gap: 5px;
+                display: grid;
+                font-size: 1.2rem;
+                transition: all 0.5s ease;
+                height: 0;
+            }
+            .view-event{
+                height: auto;
+                margin-top: 10px;
+                padding: 10px 0;
+                border-bottom: 1px solid var(--subtle-shadow);
+                border-top: 1px solid var(--subtle-shadow);
             }
             
             @media screen and (max-width:900px) {
@@ -513,10 +551,24 @@
                     padding: 10px !important;
                 }
                 .text h1{
-                    font-size: 1.3rem !important;
+                    padding: 0 !important;
+                    font-size: 0.8rem !important;
                 }
                 .full{
                     display: none;
+                }
+                .event-other-description{
+                    font-size: 0.9rem;
+                }
+                @keyframes middle-text-quote {
+                    5%,40%{
+                        transform: translateY(0%);
+                        opacity: 1;
+                    }
+                    50%{
+                        transform: translateY(100%);
+                        opacity: 0;
+                    }
                 }
             }
         </style>
@@ -563,7 +615,7 @@
             </div>
         </header>
         <main>
-            <section class="content">
+            <section class="content" title="info">
                 <h1>Information</h1>
                 <p>
                     Looking to make an unforgettable first impression on your Facebook page or personal profile? A standout professional cover is your answer! Dive into a world where your creativity meets convenience with the Desygner app. The next time inspiration hits, just snap a photo, launch the app, and effortlessly upload your masterpiece. With just a few taps, you'll be on your way to designing a cover that captures your audience's attention and sets you apart. Don't just blend in – shine bright with Desygner!
@@ -573,115 +625,151 @@
                         <h1>Upcoming Events</h1>
                         <span style="color: var(--faint-text);">exciting events that will be happening this year</span>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="event-image"><img src="cashew.jpeg" alt=""></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="event-image"><img src="cashew.jpeg" alt=""></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" ></span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
                 </div>
                 <div class="middle">
                     <div class="image">
                         <img src="pexels-jibarofoto-2014775 (1).jpg" alt="">
-                        <div class="text"><h1>Praise</h1><h1>Praise</h1></div>
+                        <div class="text"><h1 style="--index:0">Romans 6:23, For the wages of sin is death but the gift of God is eternal life through Jesus Christ our Lord</h1><h1 style="--index:1">Isaiah 41:13, For I the LORD thy God will hold thy right hand, saying unto thee, Fear not; I will help thee </h1></div>
                     </div>
                 </div>
                 <div class="upcoming-events">
@@ -689,207 +777,242 @@
                         <h1>Announcement</h1>
                         <span style="color: var(--faint-text);">exciting events that will be happening this year</span>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-
-                                <defs>
-                                
-                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
-                                
-                                </defs>
-                                
-                                <g data-name="Layer 2" id="Layer_2">
-                                
-                                <g data-name="Layer 1" id="Layer_1-2">
-                                
-                                <rect class="cls-1" height="20" width="20"/>
-                                
-                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
-                                
-                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
-                                
-                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
-                                
-                                </g>
-                                
-                                </g>
-                                
-                                </svg></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    
+                                    <defs>
+                                    
+                                    <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                    
+                                    </defs>
+                                    
+                                    <g data-name="Layer 2" id="Layer_2">
+                                    
+                                    <g data-name="Layer 1" id="Layer_1-2">
+                                    
+                                    <rect class="cls-1" height="20" width="20"/>
+                                    
+                                    <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                    
+                                    <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                    
+                                    <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                    
+                                    </g>
+                                    
+                                    </g>
+                                    
+                                    </svg></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-
-                                <defs>
-                                
-                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
-                                
-                                </defs>
-                                
-                                <g data-name="Layer 2" id="Layer_2">
-                                
-                                <g data-name="Layer 1" id="Layer_1-2">
-                                
-                                <rect class="cls-1" height="20" width="20"/>
-                                
-                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
-                                
-                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
-                                
-                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
-                                
-                                </g>
-                                
-                                </g>
-                                
-                                </svg></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    
+                                    <defs>
+                                    
+                                    <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                    
+                                    </defs>
+                                    
+                                    <g data-name="Layer 2" id="Layer_2">
+                                    
+                                    <g data-name="Layer 1" id="Layer_1-2">
+                                    
+                                    <rect class="cls-1" height="20" width="20"/>
+                                    
+                                    <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                    
+                                    <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                    
+                                    <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                    
+                                    </g>
+                                    
+                                    </g>
+                                    
+                                    </svg></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-
-                                <defs>
-                                
-                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
-                                
-                                </defs>
-                                
-                                <g data-name="Layer 2" id="Layer_2">
-                                
-                                <g data-name="Layer 1" id="Layer_1-2">
-                                
-                                <rect class="cls-1" height="20" width="20"/>
-                                
-                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
-                                
-                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
-                                
-                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
-                                
-                                </g>
-                                
-                                </g>
-                                
-                                </svg></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    
+                                    <defs>
+                                    
+                                    <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                    
+                                    </defs>
+                                    
+                                    <g data-name="Layer 2" id="Layer_2">
+                                    
+                                    <g data-name="Layer 1" id="Layer_1-2">
+                                    
+                                    <rect class="cls-1" height="20" width="20"/>
+                                    
+                                    <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                    
+                                    <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                    
+                                    <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                    
+                                    </g>
+                                    
+                                    </g>
+                                    
+                                    </svg></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                    <div class="events">
-                        <div class="event">
-                            <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
-                            <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-
-                                <defs>
-                                
-                                <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
-                                
-                                </defs>
-                                
-                                <g data-name="Layer 2" id="Layer_2">
-                                
-                                <g data-name="Layer 1" id="Layer_1-2">
-                                
-                                <rect class="cls-1" height="20" width="20"/>
-                                
-                                <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
-                                
-                                <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
-                                
-                                <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
-                                
-                                </g>
-                                
-                                </g>
-                                
-                                </svg></div>
-                            <div class="event-det">
-                                <p>Marriage Ceremony</p>
-                                <span style="color: var(--faint-text);">Rose Mary and Frank Owusu Anti Of</span>
-                                <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-                                    viewBox="0 0 297 297" xml:space="preserve">
-                               <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
-                                   c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
-                                   C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
-                                   c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
-                               </svg>
-                                </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
-                                    <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
-                                      </svg>
-                                </div>9:00am - 10:30am</span></div>
+                    <div>
+                        <div class="events">
+                            <div class="event">
+                                <div class="event-date"><span style="font-weight: bolder;">28</span><span style="color: var(--faint-text);">January</span></div>
+                                <div class="anouncement-image"><svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    
+                                    <defs>
+                                    
+                                    <style>.cls-1{fill:none;}.cls-2{fill:#1b5cf3;}.cls-3{fill:#f92115;}.cls-4{fill:#190d15;}</style>
+                                    
+                                    </defs>
+                                    
+                                    <g data-name="Layer 2" id="Layer_2">
+                                    
+                                    <g data-name="Layer 1" id="Layer_1-2">
+                                    
+                                    <rect class="cls-1" height="20" width="20"/>
+                                    
+                                    <path class="cls-2" d="M16.9,18.06,2.13,10.28a1,1,0,0,1,0-1.77L16.92,1.09A1,1,0,0,1,18.37,2v15.2A1,1,0,0,1,16.9,18.06Z"/>
+                                    
+                                    <path class="cls-3" d="M6.42,8.36a4.82,4.82,0,1,0,4.82,4.82A4.8,4.8,0,0,0,6.42,8.36Z"/>
+                                    
+                                    <path class="cls-4" d="M6.42,8.36A4.8,4.8,0,0,0,3,9.77a4.5,4.5,0,0,0-.56.68L10.9,14.9a4.67,4.67,0,0,0,.34-1.72A4.82,4.82,0,0,0,6.42,8.36Z"/>
+                                    
+                                    </g>
+                                    
+                                    </g>
+                                    
+                                    </svg></div>
+                                <div class="event-det">
+                                    <p>Marriage Ceremony</p>
+                                    <span style="color: var(--faint-text);">Rose Mary and Frank</span>
+                                    <div class="event-time-info"><span style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg fill="white" height="8px" width="8px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                        viewBox="0 0 297 297" xml:space="preserve">
+                                   <path d="M148.5,0C87.43,0,37.747,49.703,37.747,110.797c0,91.026,99.729,179.905,103.976,183.645
+                                       c1.936,1.705,4.356,2.559,6.777,2.559c2.421,0,4.841-0.853,6.778-2.559c4.245-3.739,103.975-92.618,103.975-183.645
+                                       C259.253,49.703,209.57,0,148.5,0z M148.5,79.693c16.964,0,30.765,13.953,30.765,31.104c0,17.151-13.801,31.104-30.765,31.104
+                                       c-16.964,0-30.765-13.953-30.765-31.104C117.735,93.646,131.536,79.693,148.5,79.693z"/>
+                                   </svg>
+                                    </div>Asylum Down</span><span class="time" style="display: flex; place-items: center; gap: 5px;"><div style="padding: 5px; border-radius: 50%;contain: paint; background-color: #FF645A; width: fit-content;">
+                                        <svg width="8px" height="8px" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="white" fill-rule="evenodd" d="M207.960546,159.843246 L210.399107,161.251151 C210.637153,161.388586 210.71416,161.70086 210.580127,161.933013 C210.442056,162.172159 210.144067,162.258604 209.899107,162.117176 L207.419233,160.68542 C207.165323,160.8826 206.846372,161 206.5,161 C205.671573,161 205,160.328427 205,159.5 C205,158.846891 205.417404,158.291271 206,158.085353 L206,153.503423 C206,153.22539 206.231934,153 206.5,153 C206.776142,153 207,153.232903 207,153.503423 L207,158.085353 C207.582596,158.291271 208,158.846891 208,159.5 C208,159.6181 207.986351,159.733013 207.960546,159.843246 Z M206.5,169 C211.746705,169 216,164.746705 216,159.5 C216,154.253295 211.746705,150 206.5,150 C201.253295,150 197,154.253295 197,159.5 C197,164.746705 201.253295,169 206.5,169 Z" transform="translate(-197 -150)"/>
+                                          </svg>
+                                    </div>9:00am - 10:30am</span></div>
+                                </div>
+                            </div>
+                            <div>
+                                <button onclick="viewDetail(event)">View <span class="full" >Detail</span></button>
                             </div>
                         </div>
-                        <div>
-                            <button>View <span class="full" >Detail</span></button>
+                        <div class="event-other-description">
+                            <p>We are thrilled to announce the marriage of [Bride’s Name] and [Groom’s Name], who joyfully exchanged vows on [Wedding Date] in a beautiful ceremony surrounded by family and friends at [Venue Name].
+
+                                The couple, who met [brief story of how they met, if desired], are excited to begin this new chapter in their lives. They look forward to creating a lifetime of memories together, filled with love, laughter, and adventure.</p>
+                            <label>Address: <b style="color: forestgreen;">21 Avenue Street, 37 hospital</b></label>
+                            <label>Time: <b style="color: forestgreen;">9am - 10pm</b></label>
                         </div>
                     </div>
-                </div>
                 <div class="account-container">
                     <div class="account">
                         <div class="account-face"><img src="cashew.jpeg" alt=""></div>
@@ -971,6 +1094,15 @@
                     document.body.setAttribute("mode","light")
                     toggle.classList.remove('set-dark-mode')
                 }
+            }
+            function viewDetail(e){
+                const detail = e.target.parentNode.parentNode.parentNode.querySelector('.event-other-description');
+                if(!detail.classList.contains('view-event')){
+                    detail.classList.add('view-event')
+                }else{
+                    detail.classList.remove('view-event')
+                }
+                
             }
         </script>
     </body>
