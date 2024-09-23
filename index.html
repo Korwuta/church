@@ -262,10 +262,11 @@
             }
             .middle .image{
                 width: 95%;
-                border-radius: 20px;
+                border-radius: 30px;
                 contain: paint;
                 position: relative;
                 justify-self: center;
+                border: 1px solid var(--subtle-shadow);
             }
             .middle .image img{
                 width: 100%;
@@ -402,18 +403,16 @@
                 border-bottom: 1px solid var(--subtle-shadow);
                 border-top: 1px solid var(--subtle-shadow);
             }
-            .main{
-                margin-top: 0;
-            }
+            
             .map{
                 margin-top: 80px;
+                margin: 10vh 10vw;
                 padding: 0;
                 min-height: 300px;
-                border-top-left-radius: 40px;
-                border-top-right-radius: 40px;
+                border-radius: 30px;
                 contain: paint;
-                border-top: 1px solid var(--subtle-shadow);
-                border-bottom: 1px solid var(--subtle-shadow);
+                border: 1px solid var(--subtle-shadow);
+                
             }
             .map iframe{
                 width: 100%;
@@ -590,8 +589,9 @@
                     margin-top: 0 !important;
                 }
                 .map{
-                    border-top-left-radius: 20px;
-                    border-top-right-radius: 20px;
+                    border-radius: 20px;
+                    padding: 0;
+                    margin: 4vh 5px;
                 }
                 .map iframe{
                     height: 50vh;
@@ -659,7 +659,7 @@
                 <div class="map">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d15883.655905718548!2d-0.1884806!3d5.5797341!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sgh!4v1727072677412!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="upcoming-events main">
+                <div class="upcoming-events">
                     <div class="message">
                         <h1>Upcoming Events</h1>
                         <span style="color: var(--faint-text);">exciting events that will be happening this year</span>
