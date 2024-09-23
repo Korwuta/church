@@ -420,6 +420,124 @@
                 display: block;
 
             }
+
+            /* Registration Styles*/
+
+            input,select {
+                border: 2px solid var(--account-border-color);
+                background-color: transparent;
+                font-family: inherit;
+                height: 45px;
+                outline: none;
+                border-radius: 7px;
+                padding-left: 10px;
+                padding-right: 10px;
+                caret-color: #0078D4;
+                width: 100%;
+                box-sizing: border-box;
+                margin: 10px 0;
+                display: block;
+                font-size: 1rem;
+                color: var(--text-color);
+            }
+            input:focus {
+                border-color: #0078D4;
+            }
+            .registration-form{
+                margin: 50px 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+            .registration-form>div{
+                padding: 20px 40px;
+                min-height: 500px;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                border-radius: 13px;
+            }
+            .registration-form label{
+                font-size: 1.05rem;
+            }
+            .personal-info{
+                background-color: var(--upcoming-event-background-color);
+                grid-row-start: 1;
+                grid-row-end: 3;
+                grid-column-start: 1;
+                grid-column-end: 2;
+                border: 1px solid var(--subtle-shadow);
+                height: fit-content;
+            }
+            .church-info{
+                background-color: var(--upcoming-event-background-color);
+                border: 1px solid var(--subtle-shadow);
+            }
+            .registration-form input[type='radio']{
+                width: 17px;
+                height: 17px;
+            }
+            .registration-form label[title='gender'],.registration-form label[title='marital-status']{
+                display: flex;
+                place-items: center;
+                gap: 20px;
+            }
+            .registration-form label[for='gender'],.registration-form label[for='marital-status']{
+                display: flex;
+                place-items: center;
+                gap: 8px;
+            }
+            .photo-info button{
+                width: 100%;
+                margin: 20px 0;
+                border-radius: 10px;
+            }
+            .preview-photo{
+                width: 100%;
+                height: 300px;
+                border-radius: 12px;
+                display: flex;
+                place-items: center;
+                place-content: center;
+                contain: paint;
+                border: 1px solid var(--subtle-shadow);
+                background-color: var(--account-background-color);
+                position: relative;
+            }
+            .preview-photo span{
+                position: absolute;
+                left: 50%;
+                text-wrap: nowrap;
+                transform: translateX(-50%);
+            }
+            .preview-photo span[title='prompt']{
+                top: 5px;
+                font-size: 0.9rem;
+                color: var(--text-color);
+            }
+            .preview-photo span[title='nb']{
+                color: #f92115;
+                bottom: 5px;
+                font-size: 1rem;
+            }
+            .image-container{
+                width: fit-content;
+                border-radius: 50%;
+                contain: paint;
+            }
+            .image-container img, .preview-photo svg{
+                width: 180px;
+                height: 180px;
+                object-fit: cover;
+                object-position: center top;
+                display: block;
+                text-align: center;
+            }
+            .preview-photo svg{
+                width: 120px;
+                height: 120px;
+            }
+
             
             @media screen and (max-width:900px) {
                 body{
@@ -600,6 +718,43 @@
                     height: 50vh;
                     min-height: 300px;
                 }
+                .registration-form{
+                    grid-template-columns: 1fr;
+                    padding: 0 10px;
+                }
+                .personal-info{
+                    grid-row-start: unset;
+                    grid-row-end: unset;
+                    grid-column-start: unset;
+                    grid-column-end: unset;
+                }
+                .registration-form>div{
+                    padding: 12px 18px;
+                    border-radius: 10px;
+                }
+                .registration-form label{
+                    font-size: 0.95rem;
+                }
+                .registration-form input[type='radio']{
+                    width: 12px;
+                    height: 12px;
+                }
+                .registration-form label[title='gender'],.registration-form label[title='marital-status']{
+                    display: flex;
+                    place-items: center;
+                    gap: 12px;
+                }
+                .registration-form label[for='gender'],.registration-form label[for='marital-status']{
+                    display: flex;
+                    place-items: center;
+                    gap: 4px;
+                }
+                .preview-photo span[title='prompt']{
+                    font-size: 0.7rem;
+                }
+                .preview-photo span[title='nb']{
+                    font-size: 0.7rem;
+                }
             }
             @keyframes middle-text-quote {
                     5%,40%{
@@ -655,6 +810,7 @@
             </div>
         </header>
         <main>
+            <!--Info Nav Content-->
             <section class="content" title="info">
                 <h1>Information</h1>
                 <p>
@@ -1095,8 +1251,66 @@
                     </div>
                 </div>
             </section>
+            <!--Register Nav Content-->
+            <section class="content">
+                <h1>Registration</h1>
+                <p>Anagkazo Assemblies Agape Membership Form</p>
+                <form class="registration-form">
+                    <div class="personal-info">
+                        <h2>Personal Info</h2>
+                        <label>Full Name<br><input type="text" placeholder="eg. Frank Owusu"></label>
+                        <label title="gender">Gender&nbsp;<label for="gender"><input type="radio" name="gender" value="Male" checked>Male</label><label for="gender"><input type="radio" name="gender" value="Male">Female</label></label>
+                        <label>Date of Birth<br><input type="date"></label>
+                        <label title="marital-status">Marital Status&nbsp;<label for="marital-status"><input type="radio" name="marital-status" value="Male" checked>Male</label><label for="gender"><input type="radio" name="gender" value="Male">Female</label></label>
+                        <label>Occupation<br><input type="text" placeholder="eg. Teacher"></label>
+                        <label>Location<br><input type="text" placeholder="eg. Lapaz"></label>
+                        <label>Email<br><input type="email" placeholder="eg. frankOwusu@gmail.column"></label>
+                        <label>Mobile Contact<br><input type="tel" placeholder="eg. 0248023223"></label>
+                        <label>WhatsApp Number:<br><input type="tel" placeholder="eg. 0248023223"></label>
+                    </div>
+                    <div class="church-info">
+                        <h2>Ministry Info</h2>
+                        <label>Invited By<br><input type="text" placeholder="eg. Michael Appiah"></label>
+                        <label>Shepherd<br>
+                            <select>
+                                <option selected hidden>select a Shepherd</option>
+                                <option value="">USHER</option>
+                            </select>
+                        </label>
+                        <label>Ministry<br>
+                            <select >
+                                <option selected hidden>select a Ministry</option>
+                                <option value="">USHER</option>
+                            </select>
+                        </label>
+                        <label>House Ministry<br>
+                            <select>
+                                <option selected hidden>select a House Ministry</option>
+                                <option value="">USHER</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="photo-info">
+                        <div class="preview-photo" onclick="addImage()">
+                            <span title="prompt">click container to upload image</span>
+                            <svg id="image-svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 11C8.10457 11 9 10.1046 9 9C9 7.89543 8.10457 7 7 7C5.89543 7 5 7.89543 5 9C5 10.1046 5.89543 11 7 11Z" stroke="var(--text-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5.56055 21C11.1305 11.1 15.7605 9.35991 21.0005 15.7899" stroke="var(--text-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12.28 3H5C3.93913 3 2.92172 3.42136 2.17157 4.17151C1.42142 4.92165 1 5.93913 1 7V17C1 18.0609 1.42142 19.0782 2.17157 19.8284C2.92172 20.5785 3.93913 21 5 21H17C18.0609 21 19.0783 20.5785 19.8284 19.8284C20.5786 19.0782 21 18.0609 21 17V12" stroke="var(--text-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M18.75 8.82996V0.829956" stroke="var(--text-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15.5508 4.02996L18.7508 0.829956L21.9508 4.02996" stroke="var(--text-color)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            <div class="image-container" style="display: none;"><img src="" alt="" id="photo-img"></div>
+                            <input type="file" id="image-el" accept="image/*" style="display: none;" onchange="getImage(event)">
+                            <span title="nb">NB: Image should be < 5MB, with type: JPG or PNG</span>
+                        </div>
+                        <button>Become A Member</button>
+                    </div>
+                </form>
+            </section>
         </main>
         <script>
+            //Interaction JS for dark mode and Navbar
             let selectedNav = 0
             const navList = document.querySelectorAll('.navbar li')
             const contentList = document.querySelectorAll('.content')
@@ -1147,6 +1361,24 @@
                     detail.classList.remove('view-event')
                 }
                 
+            }
+
+            //Image Picker JS
+            function getImage(e){
+                const image = e.target.files[0]
+                const imageHolder = document.querySelector('#photo-img')
+                const reader = new FileReader()
+                if(image){
+                    reader.onload = ()=>{
+                        imageHolder.src = reader.result
+                    } 
+                    reader.readAsDataURL(image)
+                    imageHolder.parentNode.style.display = ''
+                    document.querySelector('#image-svg').style.display = 'none'
+                }
+            }
+            function addImage(){
+                document.querySelector('#image-el').click()
             }
         </script>
     </body>
