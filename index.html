@@ -436,7 +436,9 @@
                 width: 100%;
                 box-sizing: border-box;
                 margin: 10px 0;
-                display: block;
+                text-align: left;
+                display: flex;
+                place-items: center;
                 font-size: 1rem;
                 color: var(--text-color);
             }
@@ -507,7 +509,7 @@
             .preview-photo span{
                 position: absolute;
                 left: 50%;
-                text-wrap: nowrap;
+                white-space: nowrap;
                 transform: translateX(-50%);
             }
             .preview-photo span[title='prompt']{
@@ -750,10 +752,10 @@
                     gap: 4px;
                 }
                 .preview-photo span[title='prompt']{
-                    font-size: 0.7rem;
+                    font-size: 0.8rem;
                 }
                 .preview-photo span[title='nb']{
-                    font-size: 0.7rem;
+                    font-size: 0.8rem;
                 }
             }
             @keyframes middle-text-quote {
